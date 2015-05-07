@@ -44,8 +44,8 @@ public class AcceptanceTest {
         charliesWall = clattered.wall("Charlie");
         assertThat(charliesWall.get(0), is("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)"));
         assertThat(charliesWall.get(1), is("Bob - Good game though. (1 minute ago)"));
-        assertThat(charliesWall.get(1), is("Bob - Damn! We lost! (2 minutes ago)"));
-        assertThat(charliesWall.get(1), is("Alice - I love the weather today (5 minutes ago)"));
+        assertThat(charliesWall.get(2), is("Bob - Damn! We lost! (2 minutes ago)"));
+        assertThat(charliesWall.get(3), is("Alice - I love the weather today (5 minutes ago)"));
     }
 
     private static void currentTime(int n) {
