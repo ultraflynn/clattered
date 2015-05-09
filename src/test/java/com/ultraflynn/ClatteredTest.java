@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.ultraflynn.TimeConstants.minutes;
+import static com.ultraflynn.TimeConstants.seconds;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -59,5 +60,18 @@ public class ClatteredTest {
         assertThat(bobsTimeline.size(), is(2));
         assertThat(bobsTimeline.get(0), is("Good game though. (1 minute ago)"));
         assertThat(bobsTimeline.get(1), is("Damn! We lost! (2 minutes ago)"));
+    }
+
+    @Test
+    public void shouldAllowUserToFollowAnotherAndSeeTheirMessagesOnTheirWall() {
+        clattered.publish("Alice", "I love the weather today");
+        DateTimeUtils.setCurrentMillisFixed(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(2));
+
+        List<String> wall = clattered.wall("Charlie");
+        assertThat(wall.size(), is(2));
+        assertThat(wall.get(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
+        assertThat(wall.get(1), is("Alice - I love the weather today (5 minutes ago)"));
     }
 }
