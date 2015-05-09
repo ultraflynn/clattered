@@ -12,7 +12,7 @@ import java.util.List;
 
 public final class CliMain {
     private static final String WELCOME_BANNER =
-            "  ____ _       _   _                    _\n" +
+                    "  ____ _       _   _                    _\n" +
                     " / ___| | __ _| |_| |_ ___ _ __ ___  __| |\n" +
                     "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
                     "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
