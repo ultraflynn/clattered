@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.ultraflynn.TimeConstants.ONE_SECOND_IN_MILLIS;
 import static com.ultraflynn.TimeConstants.minutes;
 import static com.ultraflynn.TimeConstants.seconds;
 import static org.hamcrest.CoreMatchers.is;
@@ -26,9 +25,9 @@ public class AcceptanceTest {
     @Test
     public void shouldPassBasicUsageTest() {
         // Posting: Alice can publish messages to a personal timeline
-        publish(minutes(5), "Alice", "I love the weather today");
-        publish(minutes(2), "Bob", "Damn! We lost!");
-        publish(minutes(1), "Bob", "Good game though.");
+        publish("Alice", "I love the weather today", minutes(3));
+        publish("Bob", "Damn! We lost!", minutes(4));
+        publish("Bob", "Good game though.", minutes(5));
 
         // Reading: Bob can view Alice’s timeline
         List<String> alicesTimeline = clattered.timeline("Alice");
@@ -39,7 +38,7 @@ public class AcceptanceTest {
         assertThat(bobsTimeline, at(1), is("Damn! We lost! (2 minutes ago)"));
 
         // Following: Charlie can subscribe to Alice’s and Bob’s timelines, and view an aggregated list of all subscriptions
-        publish(seconds(15), "Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        publish("Charlie", "I'm in New York today! Anyone want to have a coffee?", minutes(5) + seconds(15));
         clattered.follow("Charlie", "Alice");
 
         List<String> charliesWall = clattered.wall("Charlie");
@@ -66,7 +65,7 @@ public class AcceptanceTest {
         return offset;
     }
 
-    private void publish(long millisToAdd, String user, String message) {
+    private void publish(String user, String message, long millisToAdd) {
         clattered.publish(user, message);
         DateTimeUtils.setCurrentMillisFixed(millisToAdd);
     }

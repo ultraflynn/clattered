@@ -36,7 +36,7 @@ public class ClatteredTest {
         clattered.publish("Bob", "Good game though.");
         DateTimeUtils.setCurrentMillisFixed(minutes(2));
 
-        List<String> timeline = clattered.timeline("Alice");
+        List<String> timeline = clattered.timeline("Bob");
         assertThat(timeline.size(), is(2));
         assertThat(timeline.get(0), is("Good game though. (1 minute ago)"));
         assertThat(timeline.get(1), is("Damn! We lost! (2 minutes ago)"));
@@ -45,6 +45,19 @@ public class ClatteredTest {
     @Test
     public void shouldAllowTwoUsersToPublishMessagesToTheirTimelines() {
         clattered.publish("Alice", "I love the weather today");
+        DateTimeUtils.setCurrentMillisFixed(minutes(3));
         clattered.publish("Bob", "Damn! We lost!");
+        DateTimeUtils.setCurrentMillisFixed(minutes(4));
+        clattered.publish("Bob", "Good game though.");
+        DateTimeUtils.setCurrentMillisFixed(minutes(5));
+
+        List<String> alicesTimeline = clattered.timeline("Alice");
+        assertThat(alicesTimeline.size(), is(1));
+        assertThat(alicesTimeline.get(0), is("I love the weather today (5 minutes ago)"));
+
+        List<String> bobsTimeline = clattered.timeline("Bob");
+        assertThat(bobsTimeline.size(), is(2));
+        assertThat(bobsTimeline.get(0), is("Good game though. (1 minute ago)"));
+        assertThat(bobsTimeline.get(1), is("Damn! We lost! (2 minutes ago)"));
     }
 }
