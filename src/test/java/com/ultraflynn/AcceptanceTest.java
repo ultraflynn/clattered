@@ -1,16 +1,15 @@
 package com.ultraflynn;
 
 import org.hamcrest.Matcher;
-import org.joda.time.DateTimeUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.ultraflynn.TimeConstants.currentTime;
-import static com.ultraflynn.TimeConstants.minutes;
-import static com.ultraflynn.TimeConstants.seconds;
+import static com.ultraflynn.TimeHelper.currentTime;
+import static com.ultraflynn.TimeHelper.minutes;
+import static com.ultraflynn.TimeHelper.seconds;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
