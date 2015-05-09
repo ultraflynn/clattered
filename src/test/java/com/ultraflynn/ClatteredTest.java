@@ -1,13 +1,11 @@
 package com.ultraflynn;
 
-import org.joda.time.DateTimeUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.ultraflynn.TimeConstants.minutes;
-import static com.ultraflynn.TimeConstants.seconds;
+import static com.ultraflynn.TimeConstants.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -114,9 +112,5 @@ public class ClatteredTest {
         assertThat(wall.get(0), is("Bob - Good game though. (10 seconds ago)"));
         assertThat(wall.get(1), is("Charlie - I'm in New York today! Anyone want to have a coffee? (12 seconds ago)"));
         assertThat(wall.get(2), is("Alice - I love the weather today (5 minutes ago)"));
-    }
-
-    private static void currentTime(long current) {
-        DateTimeUtils.setCurrentMillisFixed(current);
     }
 }

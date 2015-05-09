@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.ultraflynn.TimeConstants.currentTime;
 import static com.ultraflynn.TimeConstants.minutes;
 import static com.ultraflynn.TimeConstants.seconds;
 import static org.hamcrest.CoreMatchers.is;
@@ -18,7 +19,7 @@ public class AcceptanceTest {
 
     @Before
     public void setUp() {
-        DateTimeUtils.setCurrentMillisFixed(0);
+        currentTime(0);
         clattered = new Clattered();
     }
 
@@ -45,7 +46,7 @@ public class AcceptanceTest {
         assertThat(charliesWall, at(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
         assertThat(charliesWall, at(1), is("Alice - I love the weather today (5 minutes ago)"));
 
-        DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(15));
+        currentTime(minutes(5) + seconds(15));
 
         clattered.follow("Charlie", "Bob");
         charliesWall = clattered.wall("Charlie");
@@ -69,6 +70,6 @@ public class AcceptanceTest {
 
     private void publish(String user, String message, long current) {
         clattered.publish(user, message);
-        DateTimeUtils.setCurrentMillisFixed(current);
+        currentTime(current);
     }
 }

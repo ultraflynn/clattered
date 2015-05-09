@@ -1,5 +1,7 @@
 package com.ultraflynn;
 
+import org.joda.time.DateTimeUtils;
+
 class TimeConstants {
     static final long ONE_SECOND_IN_MILLIS = 1000;
 
@@ -9,5 +11,9 @@ class TimeConstants {
 
     static long seconds(int seconds) {
         return seconds * ONE_SECOND_IN_MILLIS;
+    }
+
+    static void currentTime(long current) {
+        DateTimeUtils.setCurrentMillisFixed(current);
     }
 }
