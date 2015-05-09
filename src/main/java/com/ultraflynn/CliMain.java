@@ -55,20 +55,22 @@ public class CliMain {
 
     private Optional<List<String>> handleCommand(ImmutableList<String> words) {
         Optional<List<String>> messages = Optional.absent();
+        String user = words.get(0);
         if (words.size() == 1) {
             // reading: <user name>
-            messages = Optional.of(clattered.timeline(words.get(0)));
+            messages = Optional.of(clattered.timeline(user));
         } else if (words.size() > 1) {
-            if (words.get(1).equals("->")) {
+            String command = words.get(1);
+            if (command.equals("->")) {
                 // posting: <user name> -> <message>
                 String text = Joiner.on(" ").join(words.subList(2, words.size()));
-                clattered.publish(words.get(0), text);
-            } else if (words.get(1).equals("follows")) {
+                clattered.publish(user, text);
+            } else if (command.equals("follows")) {
                 // following: <user name> follows <another user>
-                clattered.follow(words.get(0), words.get(2));
-            } else if (words.get(1).equals("wall")) {
+                clattered.follow(user, words.get(2));
+            } else if (command.equals("wall")) {
                 // wall: <user name> wall
-                messages = Optional.of(clattered.wall(words.get(0)));
+                messages = Optional.of(clattered.wall(user));
             }
         }
         return messages;

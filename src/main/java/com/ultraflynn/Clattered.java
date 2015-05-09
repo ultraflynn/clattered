@@ -27,9 +27,9 @@ public class Clattered {
 
         ImmutableList.Builder<String> builder = ImmutableList.builder();
         List<Message> messages = ImmutableList.copyOf(usersMessages.get(user));
+
         for (Message message : Lists.reverse(messages)) {
             String elapsed = DATE_FORMAT.format(message.timestamp, now);
-
             builder.add(message.text + " (" + elapsed + ")");
         }
         return builder.build();
