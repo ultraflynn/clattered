@@ -36,12 +36,27 @@ public class Clattered {
     }
 
     public List<String> follow(String user, String follow) {
+        // Return who a user is following if they do not specify who they wish to follow
         if (follow.isEmpty()) {
             return ImmutableList.copyOf(follows.get(user));
-        } else if (!follows.containsEntry(user, follow)) {
-            // Don't add duplicate entries or there will be duplicates in the wall
-            follows.put(user, follow);
         }
+
+        // A user cannot follow themselves
+        if (user.equals(follow)) {
+            return null;
+        }
+
+        // A user can only follow users who have posted messages
+        if (!usersMessages.containsKey(follow)) {
+            return null;
+        }
+
+        // A user cannot follow the same user twice
+        if (follows.containsEntry(user, follow)) {
+            return null;
+        }
+
+        follows.put(user, follow);
         return null;
     }
 

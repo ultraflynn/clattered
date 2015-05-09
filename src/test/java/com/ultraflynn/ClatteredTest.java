@@ -124,6 +124,22 @@ public class ClatteredTest {
     }
 
     @Test
+    public void shouldIgnoreRequestToFollowThemselves() {
+        clattered.publish("Alice", "I love the weather today");
+        currentTime(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        currentTime(minutes(5) + seconds(2));
+
+        clattered.follow("Charlie", "Alice");
+        clattered.follow("Charlie", "Charlie");
+
+        List<String> wall = clattered.wall("Charlie");
+        assertThat(wall.size(), is(2));
+        assertThat(wall.get(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
+        assertThat(wall.get(1), is("Alice - I love the weather today (5 minutes ago)"));
+    }
+
+    @Test
     public void shouldListNoFollowsWhenNoUserGivenAndUserIsNotFollowingAnyone() {
         clattered.publish("Alice", "I love the weather today");
         currentTime(minutes(5));
@@ -152,5 +168,20 @@ public class ClatteredTest {
         assertThat(following.size(), is(2));
         assertThat(following.get(0), is("Alice"));
         assertThat(following.get(1), is("Bob"));
+    }
+
+    @Test
+    public void shouldOnlyAddFollowsForUsersWhoHavePosted() {
+        clattered.publish("Alice", "I love the weather today");
+        currentTime(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        currentTime(minutes(5) + seconds(2));
+
+        clattered.follow("Charlie", "Alice");
+        clattered.follow("Charlie", "Bob");
+
+        List<String> following = clattered.follow("Charlie", "");
+        assertThat(following.size(), is(1));
+        assertThat(following.get(0), is("Alice"));
     }
 }
