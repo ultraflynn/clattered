@@ -14,8 +14,7 @@ public class CliMain {
     private final Clattered clattered = new Clattered();
 
     public static void main(String[] args) {
-        CliMain main = new CliMain();
-        main.start();
+        new CliMain().start();
     }
 
     private void start() {
@@ -50,7 +49,6 @@ public class CliMain {
                 "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
                 "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
                 " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n");
-
     }
 
     private Optional<List<String>> handleCommand(ImmutableList<String> words) {
