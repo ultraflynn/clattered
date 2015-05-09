@@ -67,7 +67,7 @@ public class AcceptanceTest {
     }
 
     private void publish(long millisToAdd, String user, String message) {
-        DateTimeUtils.setCurrentMillisFixed(millisToAdd);
         clattered.publish(user, message);
+        DateTimeUtils.setCurrentMillisFixed(millisToAdd);
     }
 }

@@ -38,7 +38,7 @@ public class ClatteredTest {
 
         List<String> timeline = clattered.timeline("Alice");
         assertThat(timeline.size(), is(2));
-        assertThat(timeline.get(0), is("Good game though. (1 minutes ago)")); // TODO This should be "minute"
+        assertThat(timeline.get(0), is("Good game though. (1 minute ago)"));
         assertThat(timeline.get(1), is("Damn! We lost! (2 minutes ago)"));
     }
 
