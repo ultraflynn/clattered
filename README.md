@@ -2,13 +2,13 @@
 A console-based social networking application.
 
 ## Running
-You can run clattered using this:
+You can run `clattered` using this:
 
 ```
 mvn package exec:java
 ```
 
-To exit just hit `ctrl-C`.
+To exit just hit `Ctrl-C`.
 
 You are going to need Java 7 and Apache Maven 3.3.3 installed to do this.
 
