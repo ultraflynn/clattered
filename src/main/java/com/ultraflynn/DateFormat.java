@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
+// Takes the standard time units of PrettyTime and removes JustNow
 class DateFormat {
     private final PrettyTime dateFormatter;
 
