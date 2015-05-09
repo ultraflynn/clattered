@@ -35,11 +35,14 @@ public class Clattered {
         return builder.build();
     }
 
-    public void follow(String user, String follow) {
-        // Don't add duplicate entries or there will be duplicates in the wall
-        if (!follows.containsEntry(user, follow)) {
+    public List<String> follow(String user, String follow) {
+        if (follow.isEmpty()) {
+            return ImmutableList.copyOf(follows.get(user));
+        } else if (!follows.containsEntry(user, follow)) {
+            // Don't add duplicate entries or there will be duplicates in the wall
             follows.put(user, follow);
         }
+        return null;
     }
 
     public List<String> wall(String user) {

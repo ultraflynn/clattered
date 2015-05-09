@@ -85,7 +85,7 @@ public class ClatteredTest {
     }
 
     @Test
-    public void shouldAllowUsersToFollowMoreThanOneUser() {
+    public void shouldAllowUserToFollowMoreThanOneUser() {
         clattered.publish("Alice", "I love the weather today");
         currentTime(minutes(5));
         clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
@@ -121,5 +121,36 @@ public class ClatteredTest {
         assertThat(wall.get(0), is("Bob - Good game though. (10 seconds ago)"));
         assertThat(wall.get(1), is("Charlie - I'm in New York today! Anyone want to have a coffee? (12 seconds ago)"));
         assertThat(wall.get(2), is("Alice - I love the weather today (5 minutes ago)"));
+    }
+
+    @Test
+    public void shouldListNoFollowsWhenNoUserGivenAndUserIsNotFollowingAnyone() {
+        clattered.publish("Alice", "I love the weather today");
+        currentTime(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        currentTime(minutes(5) + seconds(2));
+        clattered.publish("Bob", "Good game though.");
+        currentTime(minutes(5) + seconds(12));
+
+        List<String> following = clattered.follow("Charlie", "");
+        assertThat(following.size(), is(0));
+    }
+
+    @Test
+    public void shouldListFollowsWhenNoUserGivenAndUserIsFollowingPeople() {
+        clattered.publish("Alice", "I love the weather today");
+        currentTime(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        currentTime(minutes(5) + seconds(2));
+        clattered.publish("Bob", "Good game though.");
+        currentTime(minutes(5) + seconds(12));
+
+        clattered.follow("Charlie", "Alice");
+        clattered.follow("Charlie", "Bob");
+
+        List<String> following = clattered.follow("Charlie", "");
+        assertThat(following.size(), is(2));
+        assertThat(following.get(0), is("Alice"));
+        assertThat(following.get(1), is("Bob"));
     }
 }

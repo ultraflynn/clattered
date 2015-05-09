@@ -10,6 +10,8 @@ mvn package exec:java
 
 To exit just hit `ctrl-C`.
 
+You are going to need Java 7 and Apache Maven 3.3.3 installed to do this.
+
 ## Commands
 
 ### Posting

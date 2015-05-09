@@ -65,7 +65,8 @@ public class CliMain {
                 clattered.publish(user, text);
             } else if (command.equals("follows")) {
                 // following: <user name> follows <another user>
-                clattered.follow(user, words.get(2));
+                String follow = words.size() == 2 ? "" : words.get(2);
+                messages = Optional.fromNullable(clattered.follow(user, follow));
             } else if (command.equals("wall")) {
                 // wall: <user name> wall
                 messages = Optional.of(clattered.wall(user));
