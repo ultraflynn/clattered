@@ -42,6 +42,15 @@ public class ClatteredTest {
     }
 
     @Test
+    public void shouldIgnoreRequestToPublishBlankMessage() {
+        clattered.publish("Alice", "");
+        currentTime(minutes(5));
+
+        List<String> timeline = clattered.timeline("Alice");
+        assertThat(timeline.size(), is(0));
+    }
+
+    @Test
     public void shouldAllowTwoUsersToPublishMessagesToTheirTimelines() {
         clattered.publish("Alice", "I love the weather today");
         currentTime(minutes(3));

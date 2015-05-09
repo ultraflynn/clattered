@@ -16,8 +16,10 @@ public class Clattered {
     private final Multimap<String, String> follows = ArrayListMultimap.create();
 
     public void publish(String user, String text) {
-        Message message = new Message(user, text);
-        usersMessages.put(user, message);
+        if (!text.isEmpty()) {
+            Message message = new Message(user, text);
+            usersMessages.put(user, message);
+        }
     }
 
     public List<String> timeline(String user) {
