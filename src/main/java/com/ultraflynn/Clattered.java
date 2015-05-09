@@ -9,20 +9,20 @@ import org.joda.time.DateTime;
 import java.util.Collections;
 import java.util.List;
 
-public class Clattered {
+final class Clattered {
     private static DateFormat DATE_FORMAT = new DateFormat();
 
     private final Multimap<String, Message> usersMessages = ArrayListMultimap.create();
     private final Multimap<String, String> follows = ArrayListMultimap.create();
 
-    public void publish(String user, String text) {
+    void publish(String user, String text) {
         if (!text.isEmpty()) {
             Message message = new Message(user, text);
             usersMessages.put(user, message);
         }
     }
 
-    public List<String> timeline(String user) {
+    List<String> timeline(String user) {
         DateTime now = DateTime.now();
 
         ImmutableList.Builder<String> builder = ImmutableList.builder();
@@ -35,7 +35,7 @@ public class Clattered {
         return builder.build();
     }
 
-    public List<String> follow(String user, String follow) {
+    List<String> follow(String user, String follow) {
         // Return who a user is following if they do not specify who they wish to follow
         if (follow.isEmpty()) {
             return ImmutableList.copyOf(follows.get(user));
@@ -60,7 +60,7 @@ public class Clattered {
         return null;
     }
 
-    public List<String> wall(String user) {
+    List<String> wall(String user) {
         DateTime now = DateTime.now();
         List<Message> messages = getMessagesForWall(user);
 

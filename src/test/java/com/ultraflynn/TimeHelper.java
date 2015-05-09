@@ -2,7 +2,7 @@ package com.ultraflynn;
 
 import org.joda.time.DateTimeUtils;
 
-class TimeHelper {
+final class TimeHelper {
     static final long ONE_SECOND_IN_MILLIS = 1000;
 
     static long minutes(int minutes) {
