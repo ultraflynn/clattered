@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.ultraflynn.TimeHelper.currentTime;
-import static com.ultraflynn.TimeHelper.minutes;
-import static com.ultraflynn.TimeHelper.seconds;
+import static com.ultraflynn.TimeHelper.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
