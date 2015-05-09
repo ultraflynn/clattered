@@ -38,10 +38,6 @@ public class CliMain {
         }
     }
 
-    private void displayPrompt() {
-        System.out.print("> ");
-    }
-
     private void displayWelcome() {
         System.out.println(
                 "  ____ _       _   _                    _\n" +
@@ -49,6 +45,10 @@ public class CliMain {
                 "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
                 "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
                 " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n");
+    }
+
+    private void displayPrompt() {
+        System.out.print("> ");
     }
 
     private Optional<List<String>> handleCommand(ImmutableList<String> words) {
