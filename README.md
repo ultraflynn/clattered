@@ -1,7 +1,18 @@
 # clattered
 A console-based social networking application.
 
-## Posting
+## Running
+You can run clattered using this:
+
+```
+mvn package exec:java
+```
+
+To exit just hit `ctrl-C`.
+
+## Commands
+
+### Posting
 Alice can publish messages to a personal timeline
 ```
 > Alice -> I love the weather today
@@ -9,7 +20,7 @@ Alice can publish messages to a personal timeline
 > Bob -> Good game though.
 ```
 
-## Reading
+### Reading
 Bob can view Alice’s timeline
 
 ```
@@ -19,7 +30,7 @@ Good game though. (1 minute ago)
 Damn! We lost! (2 minutes ago)
 ```
 
-## Following
+### Following
 Charlie can subscribe to Alice’s and Bob’s timelines, and view an aggregated list of all subscriptions.
 
 ```

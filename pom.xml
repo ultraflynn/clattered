@@ -46,22 +46,23 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.4</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>java</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>com.ultraflynn.CliMain</mainClass>
+                    <arguments>
+                        <argument>foo</argument>
+                        <argument>bar</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
