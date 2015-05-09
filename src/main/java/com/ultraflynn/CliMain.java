@@ -11,6 +11,14 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public final class CliMain {
+    private static final String WELCOME_BANNER =
+            "  ____ _       _   _                    _\n" +
+            " / ___| | __ _| |_| |_ ___ _ __ ___  __| |\n" +
+            "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
+            "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
+            " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n";
+    private static final String PROMPT = "> ";
+
     private final Clattered clattered = new Clattered();
 
     public static void main(String[] args) {
@@ -39,16 +47,11 @@ public final class CliMain {
     }
 
     private void displayWelcome() {
-        System.out.println(
-                "  ____ _       _   _                    _\n" +
-                " / ___| | __ _| |_| |_ ___ _ __ ___  __| |\n" +
-                "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
-                "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
-                " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n");
+        System.out.println(WELCOME_BANNER);
     }
 
     private void displayPrompt() {
-        System.out.print("> ");
+        System.out.print(PROMPT);
     }
 
     private Optional<List<String>> handleCommand(ImmutableList<String> words) {
