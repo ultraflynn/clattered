@@ -2,7 +2,7 @@ package com.ultraflynn;
 
 import org.joda.time.DateTime;
 
-// All fields are immutable so getters are omitted
+// All fields are immutable so getters are unnecessary
 final class Message implements Comparable<Message> {
     final DateTime timestamp = DateTime.now();
     final String user;
