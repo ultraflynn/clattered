@@ -34,7 +34,8 @@ public class Clattered {
     }
 
     public void follow(String user, String follow) {
-        if (!follows.containsKey(user)) {
+        // Don't add duplicate entries or there will be duplicates in the wall
+        if (!follows.containsEntry(user, follow)) {
             follows.put(user, follow);
         }
     }
