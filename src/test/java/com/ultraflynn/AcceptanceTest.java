@@ -38,16 +38,18 @@ public class AcceptanceTest {
         assertThat(bobsTimeline, at(1), is("Damn! We lost! (2 minutes ago)"));
 
         // Following: Charlie can subscribe to Alice’s and Bob’s timelines, and view an aggregated list of all subscriptions
-        publish("Charlie", "I'm in New York today! Anyone want to have a coffee?", minutes(5) + seconds(15));
+        publish("Charlie", "I'm in New York today! Anyone want to have a coffee?", minutes(5) + seconds(2));
         clattered.follow("Charlie", "Alice");
 
         List<String> charliesWall = clattered.wall("Charlie");
         assertThat(charliesWall, at(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
         assertThat(charliesWall, at(1), is("Alice - I love the weather today (5 minutes ago)"));
 
+        DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(15));
+
         clattered.follow("Charlie", "Bob");
         charliesWall = clattered.wall("Charlie");
-        assertThat(charliesWall, at(0), is("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)"));
+        assertThat(charliesWall, at(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)"));
         assertThat(charliesWall, at(1), is("Bob - Good game though. (1 minute ago)"));
         assertThat(charliesWall, at(2), is("Bob - Damn! We lost! (2 minutes ago)"));
         assertThat(charliesWall, at(3), is("Alice - I love the weather today (5 minutes ago)"));
@@ -65,8 +67,8 @@ public class AcceptanceTest {
         return offset;
     }
 
-    private void publish(String user, String message, long millisToAdd) {
+    private void publish(String user, String message, long current) {
         clattered.publish(user, message);
-        DateTimeUtils.setCurrentMillisFixed(millisToAdd);
+        DateTimeUtils.setCurrentMillisFixed(current);
     }
 }

@@ -6,15 +6,17 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import org.joda.time.DateTime;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Clattered {
     private static DateFormat DATE_FORMAT = new DateFormat();
 
     private final Multimap<String, Message> usersMessages = ArrayListMultimap.create();
+    private final Multimap<String, String> follows = ArrayListMultimap.create();
 
     public void publish(String user, String text) {
-        Message message = new Message(text);
+        Message message = new Message(user, text);
         usersMessages.put(user, message);
     }
 
@@ -32,9 +34,29 @@ public class Clattered {
     }
 
     public void follow(String user, String follow) {
+        follows.put(user, follow);
     }
 
     public List<String> wall(String user) {
-        return ImmutableList.of();
+        DateTime now = DateTime.now();
+        List<Message> messages = getMessagesForWall(user);
+
+        ImmutableList.Builder<String> builder = ImmutableList.builder();
+        for (Message message : messages) {
+            String elapsed = DATE_FORMAT.format(message.timestamp, now);
+            builder.add(message.user + " - " + message.text + " (" + elapsed + ")");
+        }
+        return builder.build();
+    }
+
+    private List<Message> getMessagesForWall(String user) {
+        List<Message> messages = Lists.newArrayList();
+
+        messages.addAll(usersMessages.get(user));
+        for (String following : follows.get(user)) {
+            messages.addAll(usersMessages.get(following));
+        }
+        Collections.sort(messages);
+        return messages;
     }
 }

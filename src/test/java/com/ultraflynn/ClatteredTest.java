@@ -69,6 +69,7 @@ public class ClatteredTest {
         clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
         DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(2));
 
+        clattered.follow("Charlie", "Alice");
         List<String> wall = clattered.wall("Charlie");
         assertThat(wall.size(), is(2));
         assertThat(wall.get(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));

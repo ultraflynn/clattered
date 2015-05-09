@@ -11,7 +11,12 @@ public class MessageTest {
 
     @Before
     public void setUp() {
-        message = new Message("I love the weather today");
+        message = new Message("Alice", "I love the weather today");
+    }
+
+    @Test
+    public void shouldStoreUser() {
+        assertThat(message.user, is("Alice"));
     }
 
     @Test
