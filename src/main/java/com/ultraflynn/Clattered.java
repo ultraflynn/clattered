@@ -32,7 +32,7 @@ public class Clattered {
         DateTime now = DateTime.now();
 
         ImmutableList.Builder<String> builder = ImmutableList.builder();
-        for (Message message : messages) {
+        for (Message message : Lists.reverse(messages)) {
             Period period = new Period(message.timestamp, now);
             String elapsed = DATE_FORMATTER.print(period);
 
