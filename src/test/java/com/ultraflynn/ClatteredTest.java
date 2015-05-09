@@ -70,6 +70,23 @@ public class ClatteredTest {
         DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(2));
 
         clattered.follow("Charlie", "Alice");
+
+        List<String> wall = clattered.wall("Charlie");
+        assertThat(wall.size(), is(2));
+        assertThat(wall.get(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
+        assertThat(wall.get(1), is("Alice - I love the weather today (5 minutes ago)"));
+    }
+
+    @Test
+    public void shouldIgnoreRequestToFollowSameUserTwice() {
+        clattered.publish("Alice", "I love the weather today");
+        DateTimeUtils.setCurrentMillisFixed(minutes(5));
+        clattered.publish("Charlie", "I'm in New York today! Anyone want to have a coffee?");
+        DateTimeUtils.setCurrentMillisFixed(minutes(5) + seconds(2));
+
+        clattered.follow("Charlie", "Alice");
+        clattered.follow("Charlie", "Alice");
+
         List<String> wall = clattered.wall("Charlie");
         assertThat(wall.size(), is(2));
         assertThat(wall.get(0), is("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));

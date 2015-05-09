@@ -34,7 +34,9 @@ public class Clattered {
     }
 
     public void follow(String user, String follow) {
-        follows.put(user, follow);
+        if (!follows.containsKey(user)) {
+            follows.put(user, follow);
+        }
     }
 
     public List<String> wall(String user) {
