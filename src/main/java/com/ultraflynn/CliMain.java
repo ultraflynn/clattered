@@ -13,7 +13,7 @@ import java.util.List;
 
 public final class CliMain {
     static final String WELCOME_BANNER =
-                    "  ____ _       _   _                    _\n" +
+            "  ____ _       _   _                    _\n" +
                     " / ___| | __ _| |_| |_ ___ _ __ ___  __| |\n" +
                     "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
                     "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
@@ -56,12 +56,12 @@ public final class CliMain {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(output);
         } finally {
             try {
                 input.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(output);
             }
             output.close();
         }

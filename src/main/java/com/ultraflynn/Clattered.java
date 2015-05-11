@@ -23,10 +23,10 @@ interface Clattered {
     /**
      * Adds a follow between two users.
      *
-     * @param user The user doing the following
+     * @param user   The user doing the following
      * @param follow The user being followed
      * @return If follow is specified as a blank ("") then the list of
-     *         the users follows is return. Otherwise a null.
+     * the users follows is return. Otherwise a null.
      */
     List<String> follow(String user, String follow);
 
