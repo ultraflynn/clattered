@@ -8,7 +8,7 @@ You can run `clattered` using this:
 mvn package exec:java
 ```
 
-To exit just hit `Ctrl-C`.
+To exit just enter `quit`.
 
 You are going to need Java 7 and Apache Maven 3.3.3 installed to do this.
 
