@@ -5,9 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
 
 public final class CliMain {
@@ -19,18 +17,25 @@ public final class CliMain {
                     " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n";
     private static final String PROMPT = "> ";
 
+    private final InputStream input;
+    private final PrintStream output;
     private final InMemoryClattered clattered = new InMemoryClattered();
 
     public static void main(String[] args) {
-        new CliMain().start();
+        new CliMain(System.in, System.out).start();
     }
 
-    private void start() {
+    CliMain(InputStream input, PrintStream output) {
+        this.input = input;
+        this.output = output;
+    }
+
+    void start() {
         try {
             displayWelcome();
             displayPrompt();
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader in = new BufferedReader(new InputStreamReader(input));
             String s;
             while ((s = in.readLine()) != null && s.length() != 0) {
                 ImmutableList<String> words = ImmutableList.copyOf(Splitter.on(" ").split(s));
@@ -47,11 +52,11 @@ public final class CliMain {
     }
 
     private void displayWelcome() {
-        System.out.println(WELCOME_BANNER);
+        output.println(WELCOME_BANNER);
     }
 
     private void displayPrompt() {
-        System.out.print(PROMPT);
+        output.print(PROMPT);
     }
 
     private Optional<List<String>> handleCommand(ImmutableList<String> words) {
@@ -80,7 +85,7 @@ public final class CliMain {
 
     private void displayMessages(List<String> messages) {
         for (String message : messages) {
-            System.out.println(message);
+            output.println(message);
         }
     }
 }
