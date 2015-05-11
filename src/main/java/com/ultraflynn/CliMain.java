@@ -12,27 +12,29 @@ import java.io.PrintStream;
 import java.util.List;
 
 public final class CliMain {
-    private static final String WELCOME_BANNER =
+    static final String WELCOME_BANNER =
                     "  ____ _       _   _                    _\n" +
                     " / ___| | __ _| |_| |_ ___ _ __ ___  __| |\n" +
                     "| |   | |/ _` | __| __/ _ \\ '__/ _ \\/ _` |\n" +
                     "| |___| | (_| | |_| ||  __/ | |  __/ (_| |\n" +
                     " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n";
-    private static final String PROMPT = "> ";
+    static final String PROMPT = "> ";
 
     private final BufferedReader input;
     private final PrintStream output;
-    private final InMemoryClattered clattered = new InMemoryClattered();
+    private final Clattered clattered;
 
     private boolean running = true;
 
     public static void main(String[] args) {
-        new CliMain(new BufferedReader(new InputStreamReader(System.in)), System.out).start();
+        new CliMain(new BufferedReader(new InputStreamReader(System.in)),
+                System.out, new InMemoryClattered()).start();
     }
 
-    CliMain(BufferedReader input, PrintStream output) {
+    CliMain(BufferedReader input, PrintStream output, Clattered clattered) {
         this.input = input;
         this.output = output;
+        this.clattered = clattered;
     }
 
     void start() {
@@ -100,7 +102,7 @@ public final class CliMain {
     // quitting: quit
     private Optional<List<String>> handleQuit() {
         Optional<List<String>> messages;
-        List<String> quitting = ImmutableList.of("Quitting");
+        List<String> quitting = ImmutableList.of("Quitting...");
         messages = Optional.of(quitting);
         return messages;
     }
