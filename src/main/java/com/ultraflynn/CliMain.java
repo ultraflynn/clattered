@@ -19,7 +19,7 @@ public final class CliMain {
                     " \\____|_|\\__,_|\\__|\\__\\___|_|  \\___|\\__,_|\n";
     private static final String PROMPT = "> ";
 
-    private final Clattered clattered = new Clattered();
+    private final InMemoryClattered clattered = new InMemoryClattered();
 
     public static void main(String[] args) {
         new CliMain().start();

@@ -9,13 +9,13 @@ import static com.ultraflynn.TimeHelper.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ClatteredTest {
-    private Clattered clattered;
+public class InMemoryClatteredTest {
+    private InMemoryClattered clattered;
 
     @Before
     public void setUp() {
         currentTime(0);
-        clattered = new Clattered();
+        clattered = new InMemoryClattered();
     }
 
     @Test

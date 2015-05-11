@@ -12,12 +12,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
 public class AcceptanceTest {
-    private Clattered clattered;
+    private InMemoryClattered clattered;
 
     @Before
     public void setUp() {
         currentTime(0);
-        clattered = new Clattered();
+        clattered = new InMemoryClattered();
     }
 
     @Test
